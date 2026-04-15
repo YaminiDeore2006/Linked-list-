@@ -1,0 +1,34 @@
+class Solution {
+    Node insertAtPos(Node head, int p, int x) {
+        Node newNode = new Node(x);
+        
+        // If list is empty
+        if(head == null) return newNode;
+
+        Node curr = head;
+        int count = 0;
+
+        // Move to p-th node
+        while(curr != null && count < p) {
+            curr = curr.next;
+            count++;
+        }
+
+        // If position is beyond list, return head
+        if(curr == null) return head;
+
+        // Insert after p-th node
+        Node nextNode = curr.next;
+
+        curr.next = newNode;
+        newNode.prev = curr;
+
+        newNode.next = nextNode;
+
+        if(nextNode != null) {
+            nextNode.prev = newNode;
+        }
+
+        return head;
+    }
+}
